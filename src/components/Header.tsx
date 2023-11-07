@@ -22,7 +22,7 @@ const Header = async () => {
             <Link href="pricing">Pricing</Link>
           )}
           <ToggleDarkMode />
-          <UserButton />
+          <UserButton session={session} />
         </div>
       </nav>
     </header>
