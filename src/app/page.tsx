@@ -24,6 +24,7 @@ export default function Home() {
       </div>
       <div className="mt-8">
         <Image
+          unoptimized
           src="https://media.giphy.com/media/heIX5HfWgEYlW/giphy.gif"
           alt="catgif"
           height={1442}
