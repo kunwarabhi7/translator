@@ -5,10 +5,10 @@ import { ToggleDarkMode } from "./ToggleDarkMode";
 import UserButton from "./UserButton";
 import Link from "next/link";
 import { MessagesSquareIcon } from "lucide-react";
+import CreateChatButton from "./CreateChatButton";
 
 const Header = async () => {
   const session = await getServerSession(authOption);
-  console.log(session);
   return (
     <header className="sticky top-0 bg-white dark:bg-gray-900">
       <nav className="flex flex-col sm:flex-row items-center p-5 bg-white dark:bg-gray-900 max-w-7xl mx-auto pl-2">
@@ -21,6 +21,7 @@ const Header = async () => {
           ) : (
             <Link href="pricing">Pricing</Link>
           )}
+          <CreateChatButton />
           <ToggleDarkMode />
           <UserButton session={session} />
         </div>
