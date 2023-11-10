@@ -5,7 +5,7 @@ const tiers = [
     name: "Starter",
     id: null,
     href: "#",
-    priceMonthly: null,
+    priceMonthly: "Free",
     description: "Get chatting right awat with anyone , anywhere!",
     features: [
       " 20 Message Chat Limit in Chats",
@@ -33,34 +33,38 @@ const tiers = [
 const PricingCard = () => {
   return (
     <div className="flex flex-col sm:flex-row justify-center gap-4">
-      <div className="flex flex-col items-center aspect-auto p-4 sm:p-8 border rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-600/10 shadow-none m-2 flex-1 max-w-md">
-        <h2 className="text-lg sm:text-xl font-medium text-black dark:text-white mb-2">
-          Starter
-        </h2>
-        <p>Get chatting right awat with anyone , anywhere!</p>
-        <p className="text-lg sm:text-xl text-center mb-8 mt-4 text-gray-800 dark:text-gray-400">
-          <span className="text-3xl sm:text-4xl font-bold text-black dark:text-white">
-            Free
-          </span>{" "}
-        </p>
-        <ul className="list-none list-inside mb-6 text-center text-gray-700 dark:text-gray-300">
-          <li>20 Message Chat Limit in Chats</li>
-          <li>3C Chat Rooms limit</li>
-          <li>Supports 2 languages</li>
-          <li>48-hour support response time</li>
-          <li></li>
-          <li></li>
-        </ul>
-        <Link
-          className="lemonsqueezy-button relative flex h-9 w-full mt-10 items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-white before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
-          href="https://example.com/starter-plan"
-        >
-          <span className="relative text-sm font-semibold border p-2  rounded-md border-cyan-400 dark:border-0 text-black">
-            Get Started Today
-          </span>
-        </Link>
-      </div>
-      <div className="flex flex-col items-center aspect-auto p-4 sm:p-8 border rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-600/10 shadow-none m-2 flex-1 max-w-md">
+      {tiers.map((tier) => {
+        return (
+          <div key={tier.id}>
+            <div className="flex flex-col items-center aspect-auto p-4 sm:p-8 border rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-600/10 shadow-none m-2 flex-1 max-w-md">
+              <h2 className="text-lg sm:text-xl font-medium text-black dark:text-white mb-2">
+                {tier.name}
+              </h2>
+              <p>{tier.description}</p>
+              <p className="text-lg sm:text-xl text-center mb-8 mt-4 text-gray-800 dark:text-gray-400">
+                <span className="text-3xl sm:text-4xl font-bold text-black dark:text-white">
+                  {tier.priceMonthly}
+                </span>{" "}
+              </p>
+              <ul className="list-none list-inside mb-6 text-center text-gray-700 dark:text-gray-300">
+                {tier.features.map((feature) => (
+                  <li key={feature}>{feature}</li>
+                ))}
+              </ul>
+              <Link
+                className="lemonsqueezy-button relative flex h-9 w-full mt-2 items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-white before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
+                href="https://example.com/starter-plan"
+              >
+                <span className="relative text-sm font-semibold border p-2  rounded-md border-cyan-400 dark:border-0 text-black">
+                  Get Started Today
+                </span>
+              </Link>
+            </div>
+          </div>
+        );
+      })}
+
+      {/* <div className="flex flex-col items-center aspect-auto p-4 sm:p-8 border rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-600/10 shadow-none m-2 flex-1 max-w-md">
         <h2 className="text-lg sm:text-xl font-medium text-black dark:text-white mb-2">
           {" "}
           Pro
@@ -89,7 +93,7 @@ const PricingCard = () => {
             Get Started Today
           </span>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };
