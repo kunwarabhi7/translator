@@ -22,7 +22,7 @@ const Pricing = () => {
             Were 99% sure we have a plan to match 100% of your needs
           </p>
         </div>
-        <PricingCard />
+        <PricingCard redirect={true} />
       </div>
     </div>
   );

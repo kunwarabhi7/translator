@@ -1,4 +1,6 @@
+import { CheckIcon } from "lucide-react";
 import Link from "next/link";
+import CheckOutButton from "./CheckOutButton";
 
 const tiers = [
   {
@@ -30,70 +32,64 @@ const tiers = [
     ],
   },
 ];
-const PricingCard = () => {
+const PricingCard = ({ redirect }: { redirect: boolean }) => {
   return (
-    <div className="flex flex-col sm:flex-row justify-center gap-4">
+    <div className="mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2">
       {tiers.map((tier) => {
         return (
-          <div key={tier.id}>
-            <div className="flex flex-col items-center aspect-auto p-4 sm:p-8 border rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-600/10 shadow-none m-2 flex-1 max-w-md">
-              <h2 className="text-lg sm:text-xl font-medium text-black dark:text-white mb-2">
+          <div
+            key={tier.id}
+            className="flex flex-col justify-between rounded-3xl bg-white p-8 shadow-xl ring-1 ring-gray-900/10 sm:p-10 "
+          >
+            <div>
+              <h3
+                id={tier.id + tier.name}
+                className="text-base font-semibold leading-7 text-indigo-600"
+              >
                 {tier.name}
-              </h2>
-              <p>{tier.description}</p>
-              <p className="text-lg sm:text-xl text-center mb-8 mt-4 text-gray-800 dark:text-gray-400">
-                <span className="text-3xl sm:text-4xl font-bold text-black dark:text-white">
-                  {tier.priceMonthly}
-                </span>{" "}
+              </h3>
+              <div className="mt-4 flex items-baseline gap-x-2">
+                {tier.priceMonthly ? (
+                  <>
+                    <span className="text-5xl font-bold tracking-tight text-gray-900 ">
+                      {tier.priceMonthly}
+                    </span>
+                    <span className="text-base font-semibold leading-7 text-gray-600">
+                      /month
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text5xl font-bold tracking-tight text-gray-900">
+                      Free
+                    </span>
+                  </>
+                )}
+              </div>
+              <p className="mt-6 text-base leading-7 text-gray-600">
+                {tier.description}
               </p>
-              <ul className="list-none list-inside mb-6 text-center text-gray-700 dark:text-gray-300">
+
+              <ul
+                role="list"
+                className="mt-10 space-y-4 text-sm leading-6 text-gray-600"
+              >
                 {tier.features.map((feature) => (
-                  <li key={feature}>{feature}</li>
+                  <li key={feature} className="flex gap-x-3">
+                    <CheckIcon />
+                    {feature}
+                  </li>
                 ))}
               </ul>
-              <Link
-                className="lemonsqueezy-button relative flex h-9 w-full mt-2 items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-white before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
-                href="https://example.com/starter-plan"
-              >
-                <span className="relative text-sm font-semibold border p-2  rounded-md border-cyan-400 dark:border-0 text-black">
-                  Get Started Today
-                </span>
-              </Link>
             </div>
+            {redirect ? (
+              <Link href="/register">Get Started Today</Link>
+            ) : (
+              tier.id && <CheckOutButton />
+            )}
           </div>
         );
       })}
-
-      {/* <div className="flex flex-col items-center aspect-auto p-4 sm:p-8 border rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-600/10 shadow-none m-2 flex-1 max-w-md">
-        <h2 className="text-lg sm:text-xl font-medium text-black dark:text-white mb-2">
-          {" "}
-          Pro
-        </h2>
-        <p>Unlock the Full Potential With Pro!</p>
-        <p className="text-lg sm:text-xl text-center mb-8 mt-4 text-gray-800 dark:text-gray-400">
-          <span className="text-3xl sm:text-4xl font-bold text-black dark:text-white">
-            $5.99
-          </span>{" "}
-          / Month
-        </p>
-
-        <ul className="list-none list-inside mb-6 text-center text-gray-700 dark:text-gray-300">
-          <li>Unlimited Messages in Chats</li>
-          <li>Unlimited Participants in Chats</li>
-          <li>Supports upto 10 languages </li>
-          <li>Multuimedua support in Chats (coming soon) </li>
-          <li>1-hour,dedicated support response time</li>
-          <li>Early access to New Features</li>
-        </ul>
-        <Link
-          className="lemonsqueezy-button relative flex h-9 w-full items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-white before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
-          href="https://example.com/pro-plan"
-        >
-          <span className="relative text-sm font-semibold border p-2 rounded-md border-cyan-400 dark:border-0 text-black">
-            Get Started Today
-          </span>
-        </Link>
-      </div> */}
     </div>
   );
 };
