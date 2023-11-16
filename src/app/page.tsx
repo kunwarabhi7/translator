@@ -1,8 +1,12 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { authOption } from "../../auth";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOption);
+  console.log(session);
   return (
     <div className="text-center bg-gray-100 p-8 dark:bg-gray-900 ">
       <p className="text-3xl font-bold">Chat With Anyone, Anywhere!</p>
